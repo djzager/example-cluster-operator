@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-cluster-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: example-cluster-operator
+  template:
+    metadata:
+      labels:
+        name: example-cluster-operator
+    spec:
+      serviceAccountName: example-cluster-operator
+      containers:
+        - name: example-cluster-operator
+          # Replace this with the built image name
+          image: REPLACE_IMAGE
+          command:
+          - example-cluster-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "example-cluster-operator"
