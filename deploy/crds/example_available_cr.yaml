@@ -1,0 +1,9 @@
+apiVersion: app.example.com/v1alpha1
+kind: ExampleClusterOperator
+metadata:
+  name: exampleclusteroperator
+spec:
+  operatorAvailable: "True"
+  operatorProgressing: "False"
+  operatorDegraded: "False"
+  operatorUpgradeable: "Unknown"
